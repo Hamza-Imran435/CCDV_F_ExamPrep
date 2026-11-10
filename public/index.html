@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CCDV-F Exam Prep</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">CCDV-F</span>
+      <span class="brand-sub">Claude Certified Developer &mdash; Foundations</span>
+    </div>
+    <nav class="topnav">
+      <button class="nav-btn" data-view="home">Home</button>
+      <button class="nav-btn" data-view="progress">Progress</button>
+    </nav>
+  </header>
+
+  <main id="view-root"></main>
+
+  <template id="tmpl-home">
+    <section class="panel setup-panel">
+      <h1>Practice Quiz</h1>
+      <p class="muted">Select a difficulty and topic to generate a fresh set of MCQs covering the exam syllabus.</p>
+
+      <div class="field-group">
+        <label>Difficulty</label>
+        <div class="choice-row" id="difficulty-choices">
+          <button class="choice-btn" data-value="beginner">Beginner</button>
+          <button class="choice-btn" data-value="medium">Medium</button>
+          <button class="choice-btn" data-value="hard">Hard</button>
+          <button class="choice-btn active" data-value="mixed">Mixed</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="topic-select">Topic</label>
+        <select id="topic-select">
+          <option value="all">All topics (full syllabus)</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>Number of questions</label>
+        <div class="choice-row" id="length-choices">
+          <button class="choice-btn" data-value="10">10</button>
+          <button class="choice-btn active" data-value="20">20</button>
+          <button class="choice-btn" data-value="40">40</button>
+          <button class="choice-btn" data-value="0">All matching</button>
+        </div>
+      </div>
+
+      <button id="start-quiz" class="primary-btn">Start Quiz</button>
+
+      <div class="bank-meta" id="bank-meta"></div>
+    </section>
+
+    <section class="panel summary-panel">
+      <h2>Your Progress</h2>
+      <div id="home-summary" class="summary-grid"></div>
+      <div id="home-weak-topics"></div>
+    </section>
+  </template>
+
+  <template id="tmpl-quiz">
+    <section class="panel quiz-panel">
+      <div class="quiz-head">
+        <div class="quiz-progress">
+          <span id="quiz-counter">Question 1 / 20</span>
+          <div class="progress-bar"><div class="progress-fill" id="quiz-progress-fill"></div></div>
+        </div>
+        <div class="quiz-tags">
+          <span class="tag tag-difficulty" id="quiz-difficulty-tag"></span>
+          <span class="tag tag-topic" id="quiz-topic-tag"></span>
+        </div>
+      </div>
+
+      <h2 id="quiz-question" class="question-text"></h2>
+      <div id="quiz-options" class="options-list"></div>
+
+      <div id="quiz-explanation" class="explanation hidden"></div>
+
+      <div class="quiz-actions">
+        <button id="quiz-quit" class="ghost-btn">Quit</button>
+        <button id="quiz-check" class="primary-btn" disabled>Check Answer</button>
+        <button id="quiz-next" class="primary-btn hidden">Next Question</button>
+      </div>
+    </section>
+  </template>
+
+  <template id="tmpl-results">
+    <section class="panel results-panel">
+      <h1>Quiz Results</h1>
+      <div class="score-circle" id="score-circle">
+        <span id="score-percent">0%</span>
+      </div>
+      <p class="muted" id="score-detail"></p>
+
+      <div class="results-breakdown" id="results-breakdown"></div>
+
+      <h3>Review</h3>
+      <div id="results-review" class="review-list"></div>
+
+      <div class="quiz-actions">
+        <button id="results-retry-missed" class="ghost-btn">Retry Missed Questions</button>
+        <button id="results-new" class="primary-btn">New Quiz</button>
+      </div>
+    </section>
+  </template>
+
+  <template id="tmpl-progress">
+    <section class="panel progress-panel">
+      <h1>Progress Dashboard</h1>
+
+      <div class="summary-grid" id="progress-summary"></div>
+
+      <h3>By Difficulty</h3>
+      <div id="progress-by-difficulty" class="bar-list"></div>
+
+      <h3>By Topic</h3>
+      <div id="progress-by-topic" class="bar-list"></div>
+
+      <h3>Recent Attempts</h3>
+      <div id="progress-attempts" class="attempts-list"></div>
+
+      <button id="progress-reset" class="ghost-btn danger">Reset All Progress</button>
+    </section>
+  </template>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
